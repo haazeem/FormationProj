@@ -1,0 +1,149 @@
+<app-navbar></app-navbar>
+<br><br>
+<div class="container">
+    <!-- Section: Contact v.2 -->
+    <section class="my-5">
+
+        <!-- Section heading -->
+        <h2 class="h1-responsive font-weight-bold text-center my-5">Contact us</h2>
+        <!-- Section description -->
+        <p class="text-center w-responsive mx-auto mb-5">we're happy to hear from you , complete the form to contact us , feel free </p>
+
+        <!-- Grid row -->
+        <div class="row">
+
+            <!-- Section: Contact v.2 -->
+            <div class="col-md-5 mb-md-0 mb-5">
+
+                <form [formGroup]="contactForm">
+
+                    <!-- Grid row -->
+                    <div class="row">
+
+                        <!-- Grid column -->
+                        <div class="col-md-6">
+                            <div class="md-form mb-0">
+                                <input type="text" id="contact-name" name="name" formControlName="name"
+                                    class="form-control" mdbInput>
+                                <label for="contact-name" class="">Your name</label>
+                                <small *ngIf="name.invalid" style="color : red">
+                                    <div *ngIf="name.errors.required">
+                                        Name required !
+                                    </div>
+
+                                </small>
+                            </div>
+                        </div>
+                        <!-- Grid column -->
+
+                        <!-- Grid column -->
+                        <div class="col-md-6">
+                            <div class="md-form mb-0">
+                                <input type="text" id="contact-email" name="email" formControlName="email"
+                                    class="form-control" mdbInput>
+                                <label for="contact-email" class="">Your email</label>
+                                <small *ngIf="email.invalid" style="color : red">
+                                    <div *ngIf="email.errors.required">
+                                        Email required !
+                                    </div>
+                                    <div *ngIf="email.errors.email">
+                                        Email Invalid
+                                    </div>
+
+                                </small>
+                            </div>
+                        </div>
+                        <!-- Grid column -->
+
+                    </div>
+                    <!-- Grid row -->
+
+                    <!-- Grid row -->
+                    <div class="row">
+
+                        <!-- Grid column -->
+                        <div class="col-md-12">
+                            <div class="md-form mb-0">
+                                <input type="text" id="contact-Subject" name="subject" formControlName="subject"
+                                    class="form-control" mdbInput>
+                                <label for="contact-Subject" class="">Subject</label>
+                                <small *ngIf="subject.invalid" style="color : red">
+                                    <div *ngIf="subject.errors.required">
+                                        Subject required !
+                                    </div>
+
+                                </small>
+
+                            </div>
+                        </div>
+                        <!-- Grid column -->
+
+                    </div>
+                    <!-- Grid row -->
+
+                    <!-- Grid row -->
+                    <div class="row">
+
+                        <!-- Grid column -->
+                        <div class="col-md-12">
+                            <div class="md-form">
+                                <textarea type="text" id="contact-message" name="description"
+                                    formControlName="description" class="form-control md-textarea" rows="3"
+                                    mdbInput></textarea>
+                                <label for="contact-message">Your message</label>
+                                <small *ngIf="description.invalid" style="color : red">
+                                    <div *ngIf="description.errors.required">
+                                        Subject required !
+                                    </div>
+                                    <div *ngIf="description.errors.minlength">
+                                        at least 5 characteres 
+                                    </div>
+
+                                </small>
+
+                            </div>
+                        </div>
+                        <!-- Grid column -->
+
+                    </div>
+                    <!-- Grid row -->
+
+                </form>
+
+                <div class="text-center text-md-left">
+                    <button mdbBtn color="primary" [disabled]="contactForm.invalid" (click)="sendContact()" mdbWavesEffect>Send</button>
+                </div>
+
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-2 text-center">
+                <ul class="list-unstyled mb-0">
+                    <li>
+                        <mdb-icon fas icon="map-marked" size="2x" class="blue-text"></mdb-icon>
+                        <p>San Francisco, CA 94126, USA</p>
+                    </li>
+                    <li>
+                        <mdb-icon fas icon="phone" size="2x" class="mt-4 blue-text"></mdb-icon>
+                        <p>+ 01 548 632 41</p>
+                    </li>
+                    <li>
+                        <mdb-icon fas icon="envelope" size="2x" class="mt-4 blue-text"></mdb-icon>
+                        <p class="mb-0">contact@DropandListen.com</p>
+                    </li>
+                </ul>
+            </div>
+            <!-- Grid column -->
+            <div class="col-md-5 mb-md-0 mb-4">
+                <agm-map [latitude]="latitude" [longitude]="longitude" style="height: 300px">
+                    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+                </agm-map>
+            </div>
+        </div>
+        <!-- Grid row -->
+    </section>
+</div>
+<br><br>
+
+<app-footer></app-footer>

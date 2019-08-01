@@ -1,0 +1,273 @@
+<app-navbar></app-navbar>
+<br>
+<div class="container">
+
+    <div class="card o-hidden border-0  my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                <div class="col-lg-7">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                        </div>
+                        <form *ngIf="isLogged==false" class="user" [formGroup]="subscribeForm"
+                            (ngSubmit)="Inscription()">
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input type="text" name="nom" formControlName="nom"
+                                        class="form-control form-control-user" id="exampleFirstName"
+                                        placeholder="First Name">
+                                    <small *ngIf="nom.touched && nom.invalid" style="color : red">
+                                        <div *ngIf="nom.errors.required">
+                                            Le champ Nom est obligatoire !
+                                        </div>
+                                        <div *ngIf="nom.errors.pattern">
+                                            Le champ Nom est invalide !
+                                        </div>
+                                    </small>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" name="prenom" formControlName="prenom"
+                                        class="form-control form-control-user" id="exampleLastName"
+                                        placeholder="Last Name">
+                                    <small *ngIf="prenom.touched && prenom.invalid" style="color : red">
+                                        <div *ngIf="prenom.errors.required">
+                                            Le champ prenom est obligatoire !
+                                        </div>
+                                        <div *ngIf="prenom.errors.pattern">
+                                            Le champ prenom est invalide !
+                                        </div>
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" name="email" formControlName="email"
+                                    class="form-control form-control-user" id="exampleInputEmail"
+                                    placeholder="Email Address">
+                                <small *ngIf="email.touched && email.invalid" style="color : red">
+                                    <div *ngIf="email.errors.required">
+                                        Le champ Email est obligatoire !
+                                    </div>
+                                    <div *ngIf="email.errors.email || email.errors.pattern">
+                                        Le champ Email est incorrect !
+                                    </div>
+                                    <div *ngIf="email.errors.minLength">
+                                        Minimum 8 caractéres !
+                                    </div>
+                                </small>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input type="password" name="motDePasse" formControlName="motDePasse"
+                                        class="form-control form-control-user" id="exampleInputPassword"
+                                        placeholder="Password">
+                                    <small *ngIf="motDePasse.touched && motDePasse.invalid" style="color : red">
+                                        <div *ngIf="motDePasse.errors.required">
+                                            Le champ mot de passe est obligatoire !
+                                        </div>
+                                        <div *ngIf="motDePasse.errors.minlength">
+                                            Minimum 8 !
+                                        </div>
+                                    </small>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="password" name="repMotDePasse" formControlName="repMotDePasse"
+                                        class="form-control form-control-user" id="exampleRepeatPassword"
+                                        placeholder="Repeat Password">
+                                    <small *ngIf="repMotDePasse.touched && repMotDePasse.invalid" style="color : red">
+                                        <div *ngIf="repMotDePasse.errors.required">
+                                            Le champ mot de passe est obligatoire !
+                                        </div>
+                                    </small>
+                                    <small *ngIf="motDePasse.value!=repMotDePasse.value && repMotDePasse.valid "
+                                        style="color : red">
+                                        Le mot de passe doit étre identique !
+                                    </small>
+                                </div>
+                            </div>
+                            <button *ngIf="isPremium!=='premium' " [disabled]="subscribeForm.invalid "
+                                class="btn btn-primary btn-user btn-block">
+                                Register Account
+                            </button>
+
+                            <!-- Button trigger modal -->
+
+                            <button type="button" *ngIf="isPremium==='premium'" [disabled]="subscribeForm.invalid"
+                                class="btn btn-primary btn-user btn-block" data-toggle="modal"
+                                data-target="#exampleModal">
+                                Next Step
+                            </button>
+
+
+                            <!-- Modal -->
+
+                            <hr>
+
+                        </form>
+
+                        <span *ngIf="isLogged==true">
+                            <br><br><br>
+                            <button type="button" class="btn btn-primary btn-user btn-block" data-toggle="modal"
+                                data-target="#exampleModal">
+                                Next Step
+                            </button>
+                            <br><br><br><br><br>
+                        </span>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Credit Card Info</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container py-5">
+
+
+                                            <!-- Credit card form content -->
+                                            <div class="tab-content">
+
+                                                <!-- credit card info-->
+                                                <div id="nav-tab-card" class="tab-pane fade show active">
+                                                    <p class="alert alert-info">All fields are required ! </p>
+                                                    <form role="form" [formGroup]="creditCardform"
+                                                        (ngSubmit)="saveInfo()">
+                                                        <div class="form-group">
+                                                            <label for="username">Full name (on the
+                                                                card)</label>
+                                                            <input type="text" name="name" formControlName="name"
+                                                                placeholder="Jason Doe" required class="form-control">
+                                                            <small *ngIf="name.invalid" style="color : red">
+                                                                <div *ngIf="name.errors.required">
+                                                                    Name required
+                                                                </div>
+                                                                <div *ngIf="name.errors.minlength">
+                                                                    At least 2 characters !
+                                                                </div>
+                                                            </small>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="cardNumber">Card number</label>
+                                                            <div class="input-group">
+                                                                <input type="text" name="creditcardNumber"
+                                                                    formControlName="creditcardNumber"
+                                                                    placeholder="Your card number" class="form-control"
+                                                                    required>
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text text-muted">
+                                                                        <i class="fab fa-cc-visa mx-1"></i>
+                                                                        <i class="fab fa-cc-amex mx-1"></i>
+                                                                        <i class="fab fa-cc-mastercard mx-1"></i>
+                                                                    </span>
+                                                                </div>
+
+                                                            </div>
+                                                            <small *ngIf="creditcardNumber.invalid" style="color : red">
+                                                                <div *ngIf="creditcardNumber.errors.required">
+                                                                    credit card Number required
+                                                                </div>
+                                                                <div *ngIf="creditcardNumber.errors.pattern">
+                                                                    Invalid Numbers
+                                                                </div>
+                                                            </small>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-8">
+                                                                <div class="form-group">
+                                                                    <label><span
+                                                                            class="hidden-xs">Expiration</span></label>
+                                                                    <div class="input-group">
+                                                                        <input type="number" name="monthExpr"
+                                                                            formControlName="monthExpr" placeholder="MM"
+                                                                            name="" class="form-control" required>
+
+
+                                                                        <input type="number" name="yearExpr"
+                                                                            formControlName="yearExpr"
+                                                                            placeholder="YYYY" name=""
+                                                                            class="form-control" required>
+
+                                                                    </div>
+                                                                </div>
+                                                                <span class="row">
+                                                                    <small *ngIf="monthExpr.invalid"
+                                                                        style="color : red">
+                                                                        <div *ngIf="monthExpr.errors.required">
+                                                                            Month required
+                                                                        </div>
+                                                                        <div
+                                                                            *ngIf="monthExpr.errors.min || monthExpr.errors.max ">
+                                                                            Invalid Month
+                                                                        </div>
+                                                                    </small>
+                                                                    <small class="mx-4" *ngIf="yearExpr.invalid" style="color : red">
+                                                                        <div *ngIf="yearExpr.errors.required">
+                                                                            Year required required
+                                                                        </div>
+                                                                        <div *ngIf="yearExpr.errors.min ||  yearExpr.errors.max">
+                                                                            Invalid Year
+                                                                        </div>
+                                                                    </small>
+                                                                </span>
+
+
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group mb-4">
+                                                                    <label data-toggle="tooltip"
+                                                                        title="Three-digits code on the back of your card">CVV
+                                                                        <i class="fa fa-question-circle"></i>
+                                                                    </label>
+                                                                    <input type="text" required name="cvvNumber"
+                                                                        formControlName="cvvNumber"
+                                                                        class="form-control">
+                                                                    <small *ngIf="cvvNumber.invalid"
+                                                                        style="color : red">
+                                                                        <div *ngIf="cvvNumber.errors.required">
+                                                                            cvv Number required
+                                                                        </div>
+                                                                        <div *ngIf="cvvNumber.errors.pattern">
+                                                                            Invalid cvv Number
+                                                                        </div>
+                                                                    </small>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <!-- End -->
+
+                                            </div>
+                                            <!-- End -->
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary btn-user btn-block"
+                                            data-dismiss="modal">Close</button>
+                                        <button (click)="saveInfo()" [disabled] = "creditCardform.invalid" data-dismiss="modal"
+                                            class="btn btn-primary btn-user btn-block">
+                                            Register Account
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <a class="small" routerLink="/login">Already have an account? Login!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<app-footer></app-footer>

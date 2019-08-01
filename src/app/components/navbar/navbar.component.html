@@ -1,0 +1,44 @@
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark cyan fixed-top" [containerInside]="false">
+
+  <!-- Navbar brand -->
+  <mdb-navbar-brand><a class="navbar-brand" routerLink="/home">DROP & LISTEN</a></mdb-navbar-brand>
+
+  <!-- Collapsible content -->
+  <links>
+
+    <!-- Links -->
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item ">
+        <a *ngIf="isContact==false" class="nav-link waves-light" routerLink="/contact" mdbWavesEffect>
+          <mdb-icon fas icon="envelope"></mdb-icon> Contact<span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a *ngIf="isConnected==true" class="nav-link waves-light" [routerLink]="url" mdbWavesEffect>
+            <mdb-icon fas icon="tachometer-alt"></mdb-icon> Dashbord<span class="sr-only">(current)</span>
+        </a>
+      </li>
+
+
+      <!-- Dropdown -->
+      <li class="nav-item">
+        <a *ngIf="isPricing==false" class="nav-link waves-light" routerLink="/pricing" mdbWavesEffect>
+          <mdb-icon fas icon="money-check-alt"></mdb-icon> Pricing
+        </a>
+      </li>
+      <li *ngIf="isLogin==false && isConnected==false" class="nav-item">
+        <a class="nav-link waves-light" routerLink="/login" mdbWavesEffect>
+          <mdb-icon fas icon="sign-in-alt"></mdb-icon> Login
+        </a>
+      </li>
+
+
+
+    </ul>
+    <!-- Links -->
+  </links>
+  <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->

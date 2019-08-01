@@ -1,0 +1,73 @@
+<app-navbar></app-navbar>
+<br><br>
+<div class="container">
+    <section class="pricing py-5">
+        <div class="container">
+            <h1 style="text-align: center">Our Pricing</h1><br>
+            <div class="row">
+                <!-- Free Tier -->
+                <div class="col-lg-6">
+                    <div class="card mb-5 mb-lg-0">
+                        <div class="card-body">
+                            <h5 class="card-title text-muted text-uppercase text-center">Free</h5>
+                            <h6 class="card-price text-center">$0<span class="period">/month</span></h6>
+                            <hr>
+                            <ul class="fa-ul">
+                                <li><span class="fa-li"><i class="fas fa-check"></i></span>Acces WS (only pdftobase64
+                                    API)</li>
+                                <li><span class="fa-li"><i class="fas fa-check"></i></span>Maximum file size 512Ko</li>
+                                <li><span class="fa-li"><i class="fas fa-check"></i></span>200 API Calls per Month
+                                </li>
+                                <li><span class="fa-li"><i class="fas fa-check"></i></span>Dashbord to trace your
+                                    requests</li>
+                                <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>Cloud to
+                                    Store your Wav files</li>
+                                <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>1GB
+                                    Storage
+                                </li>
+
+                            </ul>
+                            <button [disabled]="isLoggedFreeUser==true" [routerLink]="['/register']"
+                                [queryParams]="{ type: 'free'}" class="btn btn-block btn-primary text-uppercase">
+                                <span *ngIf="isLoggedFreeUser==false">Register</span>
+                                <span *ngIf="isLoggedFreeUser==true">Already have an account</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Plus Tier -->
+                <div class="col-lg-6">
+                    <div class="card mb-5 mb-lg-0">
+                        <div class="card-body">
+                            <h5 class="card-title text-muted text-uppercase text-center">Premium</h5>
+                            <h6 class="card-price text-center">$19<span class="period">/month</span></h6>
+                            <hr>
+                            <ul class="fa-ul">
+                                <li><span class="fa-li"><i class="fas fa-check"></i></span><strong>Full Acces WS
+                                    </strong></li>
+                                <li><span class="fa-li"><i class="fas fa-check"></i></span>Maximun file size 1,5MO</li>
+                                <li><span class="fa-li"><i class="fas fa-check"></i></span>2000 API Calls per Month
+                                </li>
+                                <li><span class="fa-li"><i class="fas fa-check"></i></span>Dashbord to trace your
+                                    requests </li>
+                                <li><span class="fa-li"><i class="fas fa-check"></i></span>Cloud to Store your Wav files
+                                </li>
+                                <li><span class="fa-li"><i class="fas fa-check"></i></span>1GB Storage</li>
+
+                            </ul>
+                            <button [disabled]="isLoggedPremium==true" [routerLink]="['/register']"
+                                [queryParams]="{ type: 'premium'}" class="btn btn-block btn-primary text-uppercase">
+                                <span *ngIf="isLoggedPremium==true">Already have an account</span>
+                                <span *ngIf="isLoggedFreeUser==true ">Upgrade</span>
+                                <span *ngIf="isLoggedFreeUser==false && isLoggedPremium==false">Register</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>
+
+<app-footer></app-footer>
